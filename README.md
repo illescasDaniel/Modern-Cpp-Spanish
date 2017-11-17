@@ -6,7 +6,7 @@ Tema usado para la presentación: [Metropolis](https://github.com/matze/mtheme)
 
 -> English version: https://github.com/illescasDaniel/Modern-Cpp-Slides
 
-# Vista previa
+# [Vista previa](slides.pdf)
 
 ![Title](screenshots/title.png)
 
@@ -28,4 +28,4 @@ Cualquier persona tiene permiso de decargase la presentación, modificarla, redi
 
 El único requisito es incluir el fichero de licencia (LICENSE) o la cabecera. 
 
-Más info: https://github.com/illescasDaniel/Modern-Cpp-Spanish/blob/master/LICENSE
+[Más info](LICENSE)
