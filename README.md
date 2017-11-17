@@ -16,7 +16,7 @@ Tema usado para la presentación: [Metropolis](https://github.com/matze/mtheme)
 
 # Descarga
 
-Se puede descargar desde el apartado Releases, o la última versión desde [aquí](slides.pdf).
+Se puede descargar desde el apartado Releases, o la última versión desde [aquí](https://github.com/illescasDaniel/Modern-Cpp-Spanish/raw/master/slides.pdf).
 
 # Compilación
 
