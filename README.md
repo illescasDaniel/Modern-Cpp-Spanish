@@ -16,7 +16,7 @@ Tema usado para la presentación: [Metropolis](https://github.com/matze/mtheme)
 
 # Descarga
 
-Se puede descargar desde el apartado Releases, o [aquí](https://github.com/illescasDaniel/Modern-Cpp-Spanish/releases/download/v1.0/Modern.C.-.Daniel.Illescas.Romero.pdf).
+Se puede descargar desde el apartado Releases, o la última versión desde [aquí](slides.pdf).
 
 # Compilación
 
