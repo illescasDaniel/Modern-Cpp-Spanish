@@ -332,7 +332,7 @@
 				\item Empezar en la versión \textbf{0.1}
 				\item Ir incrementando la versión \textbf{0.x.y }mientras sea SW en desarrollo
 				\item Usar la \textbf{v1.0.0} para producción
-				\item No te pases... límite de números de 255 a lo sumo
+				\item No te pases, un número de versión muy grande no es legible
 			\end{itemize}
 		\end{frame}
 		
@@ -960,8 +960,14 @@
 				
 				// using namespace evt; (opcional)
 				
-				// No es recomendable pasar datos referencia...
-				void giveMeTheObject(evt::Human& human) { ... }
+				// No es recomendable pasar datos complejos por copia...
+				// void giveMeTheObject(evt::Human human) { ... }
+				
+				// ... ni tampoco solo por referencia (se podrían editar los originales)
+				// void giveMeTheObject(evt::Human& human) { ... }
+				
+				// Mejor por referencia constante
+				void giveMeTheObject(const evt::Human& human) { ... }
 				
 				int main() {
 					constexpr evt::Human daniel(10, "Daniel");
