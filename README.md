@@ -2,6 +2,8 @@
 
 Presentación para la UGR sobre buenas prácticas y nuevas funciones de C++.
 
+Tema usado para la presentación: [Metropolis](https://github.com/matze/mtheme)
+
 # Vista previa
 
 ![Title](screenshots/title.png)
