@@ -22,4 +22,6 @@ Se usó Texpad compilando con LuaLaTex y BibTex para la bibliografía.
 
 Cualquier persona tiene permiso de decargase la presentación, modificarla, redistribuirla, etc. 
 
-El único requisito es incluir el fichero de licencia (LICENSE) o la cabecera. (Más info: https://github.com/illescasDaniel/Modern-Cpp-Spanish/blob/master/LICENSE)
+El único requisito es incluir el fichero de licencia (LICENSE) o la cabecera. 
+
+Más info: https://github.com/illescasDaniel/Modern-Cpp-Spanish/blob/master/LICENSE
