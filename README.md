@@ -4,7 +4,7 @@ Presentación para la UGR sobre buenas prácticas y nuevas funciones de C++.
 
 Tema usado para la presentación: [Metropolis](https://github.com/matze/mtheme)
 
--> Versión en español: https://github.com/illescasDaniel/Modern-Cpp-Slides
+-> English version: https://github.com/illescasDaniel/Modern-Cpp-Slides
 
 # Vista previa
 
