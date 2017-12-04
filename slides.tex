@@ -200,7 +200,7 @@
 				
 				int main() {
 					
-					// float PI = 10; -> Sería: float 3.14159 = 10 ¿?
+					// float PI = 10; -> Sería: float 3.14159 = 10; ¿?
 					
 					int numbers[SIZE];
 					
@@ -256,25 +256,48 @@
 				\begin{lstlisting}
 				// No funciona en la línea de comandos de Windows
 				std::system("ls -l > test.txt");
+				
+				// Solo funciona en Windows :/
+				std::system("pause"); 
 				\end{lstlisting}
 				
+				\item { 
+					
+					Algunas soluciones: 
+								
+					\begin{itemize}
+						\item {
+							Para listar ficheros en cualquier plataforma podemos usar:
+							 \begin{verbatim}
+							 	std::filesystem::recursive_directory_iterator
+							 \end{verbatim}
+						}
+						\item {
+							Para pausar la ejecución del programa: \texttt{cin.ignore();}
+						}
+					\end{itemize}
+				}
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}[fragile]{Dependencia de plataformas}	
+			\subsection{Dependencia de plataformas}		
+			\begin{itemize}
 				\normalSizeItem { Si se utlizan librerías antiguas y dependientes no tenemos código \textit{portable} (ni bonito a veces...) \smallCite{posixThreads}}
-				\begin{lstlisting}[basicstyle={\tiny\ttfamily}]
-				#include <pthread.h>
-
-				void* print_message_function(void* ptr) {
-					char *message;
-					message = (char *) ptr;
-					printf("%s \n", message);
-				}
-				
-				int main() {
-			
-					int iret1 = pthread_create(&thread1, NULL, print_message_function, (void*) message1);
-				}
-
-				\end{lstlisting}
-				
+						\begin{lstlisting}[basicstyle={\tiny\ttfamily}]
+						#include <pthread.h>
+		
+						void* print_message_function(void* ptr) {
+							char *message;
+							message = (char *) ptr;
+							printf("%s \n", message);
+						}
+						
+						int main() {
+							int iret1 = pthread_create(&thread1, NULL, print_message_function, (void*) message1);
+						}
+		
+						\end{lstlisting}
 			\end{itemize}
 		\end{frame}
 		
