@@ -2,7 +2,7 @@
 
 \usetheme{metropolis}
 \usepackage{listings} % Código
-%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[normalem]{ulem} % Tachar texto (con \sout)
 \usepackage[spanish]{babel}
 \usepackage{hyperref}
@@ -119,7 +119,7 @@
 				\begin{lstlisting}
 				int main() {
 					int a, b;
-					double c;
+					double _c; // NUNCA guiones bajos delante de nombres
 				}
 				\end{lstlisting}
 				
@@ -359,6 +359,39 @@
 			\end{itemize}
 		\end{frame}
 		
+		\begin{frame}[fragile]{Tamaño del Stack vs Heap}	
+			
+			El tamaño del Stack (memoria estática) es muy limitado, por lo que debemos evitar usarlo al almacenar en vectores de grandes cantidades:
+
+			\begin{lstlisting}
+				const size_t arrSize = 10'100'000;
+				// int numbers2[arrSize]; // SEGMENTATION FAULT
+				int* numbers2 = new int[arrSize];
+				
+				for (size_t i = 0; i < arrSize; i++) {
+					numbers2[int(i)] = i;
+				}
+				cout << numbers2[50] << endl;
+				
+				delete[] numbers2;
+				\end{lstlisting}
+		\end{frame}
+		
+		\begin{frame}[fragile]{Tests de unidad (Unit tests)}	
+			
+			A veces es conveniente el uso de tests, aunque por defecto C++ no tenga ninguna clase para ello. Estos nos permiten comprobar que nuestro código funciona correctamente:
+
+			\begin{lstlisting}
+				evt::UnitTest initializationTest("Array - Initialization");
+			
+				evt::Array<size_t> numbers {0,1,2,3,4};
+				
+				for (size_t i = 0; i < numbers.size(); i++) {
+					initializationTest.assert(numbers.contains(i), "Array doesn't contain expected value");
+				}
+				\end{lstlisting}
+		\end{frame}
+		
 		\newSectionWithoutIndex{Nuevo en C++}	
 		
 		\begin{frame}[fragile]{\texttt{auto}, inferencia de tipos -\smallCite{cppReference}}\subsection{\texttt{auto}, inferencia de tipos}	
@@ -472,41 +505,9 @@
 			\end{itemize}
 		\end{frame}
 		
-		\begin{frame}[fragile]{Alternativa a \textit{raw pointers}. \ttfamily{unique\_ptr<int>}}	
-			\subsection{Alternativa a raw pointers. \ttfamily{unique\_ptr<int>}}
-			\begin{itemize}
-			
-				\normalSizeItem { Liberación de memoria }
-				\begin{lstlisting}[basicstyle={\tiny\ttfamily}]
-				#include <memory>
-				
-				using namespace std;
-				
-				int* giveMeAnInt() { 
-					return new int{100};
-				}
-				
-				unique_ptr<int> giveMeACoolInt() {
-					return unique_ptr<int>(new int{100});
-				}
-				
-				auto giveMeTheBestInt() {
-					return make_unique<int>(100);
-				}
-				
-				int main() {	
-					// unique_ptr libera automáticamente memoria, int* no
-					auto number = giveMeTheBestInt();
-					cout << *number << endl;
-					
-					int* otherNumber = giveMeAnInt();
-					delete otherNumber;
-				}
-				\end{lstlisting}				
-			\end{itemize}
-		\end{frame}
-		
-		\begin{frame}[fragile]{Alternativa a \textit{raw pointers}. \ttfamily{unique\_ptr<int>}}	
+		\begin{frame}[fragile]{Alternativa a \textit{raw pointers}. \ttfamily{unique\_ptr<\_>}}	
+			\subsection{Alternativa a raw pointers. \ttfamily{unique\_ptr<\_>}}
+	
 			\begin{itemize}
 			
 				\normalSizeItem { Liberación de memoria }
@@ -528,6 +529,56 @@
 					for (size_t i = 0; i < arrSize; i++) {
 						cout << numbers[i] << endl;
 					}
+				}
+				\end{lstlisting}				
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}[fragile]{Alternativa a \textit{raw pointers}. \ttfamily{shared\_ptr<\_>}}	
+			\subsection{Alternativa a raw pointers. \ttfamily{shared\_ptr<\_>}}
+	
+			\begin{itemize}
+			
+				\normalSizeItem { Instancias compartidas }
+				\begin{lstlisting}
+				class Dog {
+				public:
+					string name = "";
+					float height = 0;	
+					Dog(const string& name, float height): name(name), height(height) {}
+				};
+				
+				class Person {
+				public:
+					string name = "";
+					float height = 0;
+					shared_ptr<const Dog> dog;
+					Person(const string& name, float height): name(name), height(height) {}
+				};
+				\end{lstlisting}				
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}[fragile]{Alternativa a \textit{raw pointers}. \ttfamily{shared\_ptr<\_>}}	
+			\subsection{Alternativa a raw pointers. \ttfamily{shared\_ptr<\_>}}
+	
+			\begin{itemize}
+			
+				\normalSizeItem { Instancias compartidas }
+				\begin{lstlisting}
+				int main() {
+
+					auto dog1 = make_shared<Dog>("Pepito", 0.4);
+					
+					Person daniel("Daniel", 1.7), elena("Elena", 1.6);
+					
+					daniel.dog = dog1;
+					elena.dog = dog1;
+					
+					dog1->height = 1;
+					//daniel.dog->height = 2; // ERROR, daniel.dog es const
+					
+					cout << daniel.dog->height << endl;
 				}
 				\end{lstlisting}				
 			\end{itemize}
@@ -1054,11 +1105,15 @@
 		\begin{frame}[allowframebreaks]{Bibliografía}
 			\bibliographystyle{plainurl}
 			\bibliography{References}
+			\vspace{0.5cm}
 			\small
 			Recomendaciones:
 			\begin{itemize}
 				\urlItem{http://devdocs.io}
+				\urlItem{https://zealdocs.org}
+				\urlItem{http://velocity.silverlakesoftware.com}
 				\urlItem{https://tex.stackexchange.com}
+				\urlItem{https://github.com/illescasDaniel/Modern-Cpp-Spanish}
 			\end{itemize}
 		\end{frame}
 \end{document}
