@@ -11,8 +11,8 @@
 \definecolor{dkgreen}{rgb}{0,0.52,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.4,0,0.7}
-\definecolor{customBlue}{rgb}{0.1,0.1,0.65}
-\definecolor{customOrange}{rgb}{0.88,0.53,0.13}
+\definecolor{customBlue}{rgb}{0.1,0.125,0.55}
+\definecolor{customOrange}{rgb}{0.80,0.43,0.13}
 
 % Cambiar tipo letra
 %\setsansfont{Arial}
@@ -49,18 +49,18 @@
     {<->}{{{\texttt{<-> }}}}1
 }
 
-%\lstset{literate=%
-%    *{0}{{{\color{customOrange}0}}}1
-%    {1}{{{\color{customOrange}1}}}1
-%    {2}{{{\color{customOrange}2}}}1
-%    {3}{{{\color{customOrange}3}}}1
-%    {4}{{{\color{customOrange}4}}}1
-%    {5}{{{\color{customOrange}5}}}1
-%    {6}{{{\color{customOrange}6}}}1
-%    {7}{{{\color{customOrange}7}}}1
-%    {8}{{{\color{customOrange}8}}}1
-%    {9}{{{\color{customOrange}9}}}1
-%}
+\lstset{literate=
+    *{0}{{{\color{customOrange}0}}}1
+    {1}{{{\color{customOrange}1}}}1
+    {2}{{{\color{customOrange}2}}}1
+    {3}{{{\color{customOrange}3}}}1
+    {4}{{{\color{customOrange}4}}}1
+    {5}{{{\color{customOrange}5}}}1
+    {6}{{{\color{customOrange}6}}}1
+    {7}{{{\color{customOrange}7}}}1
+    {8}{{{\color{customOrange}8}}}1
+    {9}{{{\color{customOrange}9}}}1
+}
 
 \newcommand{\normalSizeItem}[1] {
   \normalsize{\item #1}
@@ -267,14 +267,14 @@
 								
 					\begin{itemize}
 						\item {
+							Para pausar la ejecución del programa: \texttt{cin.ignore();}
+						}
+						\item {
 							Para listar ficheros en cualquier plataforma podemos usar:
 							 \begin{verbatim}
 							 	std::filesystem::recursive_directory_iterator
 							 \end{verbatim}
-						}
-						\item {
-							Para pausar la ejecución del programa: \texttt{cin.ignore();}
-						}
+						}					
 					\end{itemize}
 				}
 			\end{itemize}
@@ -285,17 +285,17 @@
 			\begin{itemize}
 				\normalSizeItem { Si se utlizan librerías antiguas y dependientes no tenemos código \textit{portable} (ni bonito a veces...) \smallCite{posixThreads}}
 						\begin{lstlisting}[basicstyle={\tiny\ttfamily}]
-						#include <pthread.h>
-		
-						void* print_message_function(void* ptr) {
-							char *message;
-							message = (char *) ptr;
-							printf("%s \n", message);
-						}
-						
-						int main() {
-							int iret1 = pthread_create(&thread1, NULL, print_message_function, (void*) message1);
-						}
+				#include <pthread.h>
+
+				void* print_message_function(void* ptr) {
+					char *message;
+					message = (char *) ptr;
+					printf("%s \n", message);
+				}
+				
+				int main() {
+					int iret1 = pthread_create(&thread1, NULL, print_message_function, (void*) message1);
+				}
 		
 						\end{lstlisting}
 			\end{itemize}
@@ -342,9 +342,9 @@
 			Incrementamos la versión cuando:
 			\begin{itemize}
 
-				\normalSizeItem { \textbf{MAJOR}: se hacen cambios incompatibles de API}
-				\normalSizeItem { \textbf{MINOR}: al añadir funcionalidades retrocompatibles }
-				\normalSizeItem { \textbf{PATH}: correcciones de errores }
+				\normalSizeItem { \textbf{MAJOR}: se hacen cambios incompatibles de API.}
+				\normalSizeItem { \textbf{MINOR}: al añadir funcionalidades retrocompatibles.}
+				\normalSizeItem { \textbf{PATH}: correcciones de errores.}
 			\end{itemize}
 		\end{frame}
 		
@@ -352,10 +352,10 @@
 			
 			Forma de trabajar:
 			\begin{itemize}
-				\item Empezar en la versión \textbf{0.1}
-				\item Ir incrementando la versión \textbf{0.x.y }mientras sea SW en desarrollo
-				\item Usar la \textbf{v1.0.0} para producción
-				\item No te pases, un número de versión muy grande no es legible
+				\item Empezar en la versión \textbf{0.1}.
+				\item Ir incrementando la versión \textbf{0.x.y }mientras sea SW en desarrollo.
+				\item Usar la \textbf{v1.0.0} para producción.
+				\item No te pases, un número de versión muy grande no es legible.
 			\end{itemize}
 		\end{frame}
 		
@@ -436,10 +436,10 @@
 								
 				\normalSizeItem { Otras formas de usarlo }
 				\begin{lstlisting}[basicstyle={\tiny\ttfamily}]
+				auto calculateWeight(...) -> double { ... }
 				auto add(int value, double value2) -> decltype(value + value2) {
 					return value + value2;
 				}
-				auto calculateWeight(...) -> double { ... }
 				\end{lstlisting}
 				
 			\end{itemize}
@@ -464,11 +464,11 @@
 				\normalSizeItem { Inicializar correctamente tipos }
 				\begin{lstlisting}
 				uint64_t bigStuff {643456787654};
-				int32_t things = {3500000000};
+				int32_t things = {750000000};
 				// uint8_t age {-20}; // Error al compilar
-				things += {2000000000};
-				// things = 1205032704 :(
+				things += {2100000000};
 				// no se puede evitar el overflow...
+				// things ahora es: -1444967296
 				\end{lstlisting}
 				
 			\end{itemize}
@@ -477,6 +477,12 @@
 		\begin{frame}[fragile]{\sout{NULL}, \ttfamily{nullptr}}	
 			\subsection{\sout{NULL}, \ttfamily{nullptr}}
 			\begin{itemize}
+			
+				\normalSizeItem { Asignar null}
+				\begin{lstlisting}
+				int* something = NULL; // antes C++11: NULL = 0
+				double* foo = nullptr; // C++11: std::nullptr_t
+				\end{lstlisting}
 			
 				\normalSizeItem { ¡NULL da lugar a errores! }
 				\begin{lstlisting}[basicstyle={\tiny\ttfamily}]
@@ -491,15 +497,9 @@
 				 
 					doSomething(ptrI);
 					doSomething(ptrD);
-					doSomething(nullptr);  // ambiguo sin void f(nullptr_t)
+					doSomething(nullptr);  // ambiguo sin void doSomething(nullptr_t)
 					//doSomething(NULL);  // ambiguo: todas las funciones son candidatas
 				}
-				\end{lstlisting}
-				
-				\normalSizeItem { Asignar null}
-				\begin{lstlisting}
-				int* something = NULL; // antes C++11: NULL = 0
-				double* foo = nullptr; // C++11: std::nullptr_t
 				\end{lstlisting}
 				
 			\end{itemize}
@@ -510,7 +510,7 @@
 	
 			\begin{itemize}
 			
-				\normalSizeItem { Liberación de memoria }
+				\normalSizeItem { Liberación de memoria (automática) }
 				\begin{lstlisting}
 				#include <iostream>
 				#include <memory>
@@ -519,10 +519,10 @@
 				
 				int main() {	
 					
-					constexpr size_t arrSize { 1000 };
-					
+					constexpr size_t arrSize {1000};
 					unique_ptr<int[]> numbers(new int[arrSize]);
 					//[C++14] auto numbers = make_unique<int[]>(arrSize);
+					// numbers = otherNumbers; No se permite
 					
 					fill(&numbers[0], &numbers[arrSize], 10);
 					
@@ -823,7 +823,7 @@
 				\normalSizeItem { Funciones }
 				\begin{lstlisting}
 				constexpr uint64_t factorial(int n) {
-					return n <= 1 ? 1 : (n * factorial(n - 1));
+					return (n <= 1) ? 1 : (n * factorial(n - 1));
 				}
 				
 				int main {
