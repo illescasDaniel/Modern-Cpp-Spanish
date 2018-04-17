@@ -229,18 +229,17 @@
 				namespace utils { // Esto sería una alternativa segura
 					constexpr size_t arraySize = 20;
 				}
-				
 				// ¿Cómo paso un array entonces? Así NO sabes tamaño
 				void doSomething(int arr[]) {}
-				
 				void doSomething(int arr[size]) {} // NO...
 				
 				// Opción válida
 				void doSomething(int* arr, const size_t arrSize) {}
+				// Buena opción
+				void doSomething(int* begin, int* end) {}
 				
 				// Si sabemos tamaño
 				void doSomething(std::array<int,20> arr) {}
-				
 				// Si NO sabemos tamaño
 				void doSomething(std::vector<int> arr) {}
 				\end{lstlisting}
@@ -570,10 +569,10 @@
 
 					auto dog1 = make_shared<Dog>("Pepito", 0.4);
 					
-					Person daniel("Daniel", 1.7), elena("Elena", 1.6);
+					Person daniel("Daniel", 1.7), sister("SheIsABot", 1.6);
 					
 					daniel.dog = dog1;
-					elena.dog = dog1;
+					sister.dog = dog1;
 					
 					dog1->height = 1;
 					//daniel.dog->height = 2; // ERROR, daniel.dog es const
