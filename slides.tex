@@ -22,6 +22,10 @@
   Contextuals={Alternate}
 ]{Fira Code}
 
+\makeatletter
+\def\verbatim@nolig@list{}
+\makeatother
+
 \lstset{frame=tb,
   language=c++,
   aboveskip=5mm,
@@ -43,11 +47,11 @@
   gobble=16
 }
 
-\lstset{literate=
-    {->}{{{\texttt{-> }}}}1
-    {<-}{{{\texttt{<- }}}}1    
-    {<->}{{{\texttt{<-> }}}}1
-}
+%\lstset{literate=
+%    *{->}{{{\texttt{-> }}}}1
+%    {<-}{{{\texttt{<- }}}}1  
+%    {<->}{{{\texttt{<-> }}}}1
+%}
 
 \lstset{literate=
     *{0}{{{\color{customOrange}0}}}1
